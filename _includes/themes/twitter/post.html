@@ -1,0 +1,66 @@
+<div class="page-header">
+  <h1>{{ page.title }} {% for category in page.categories %} <a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category }}-ref"><small>{{ category }}</small></a> {% endfor %} </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    {{ content }}
+    <hr>
+    <div class="pagination">
+      <div style="text-align:center;">
+        <ul>
+        {% if page.previous %}
+          <li class="prev"><a href="{{ BASE_PATH }}{{ page.previous.url }}" title="{{ page.previous.title }}">&larr; Previous</a></li>
+        {% else %}
+          <li class="prev disabled"><a>&larr; Previous</a></li>
+        {% endif %}
+          <li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>
+        {% if page.next %}
+          <li class="next"><a href="{{ BASE_PATH }}{{ page.next.url }}" title="{{ page.next.title }}">Next &rarr;</a></li>
+        {% else %}
+          <li class="next disabled"><a>Next &rarr;</a>
+        {% endif %}
+        </ul>
+      </div>
+    </div>
+    <hr>
+	<div id="comments-ref">
+      {% include JB/comments %}
+	</div>
+  </div>
+  
+  <div class="span4">
+    <ul>
+      <li>
+        <h4>Published</h4>
+        <div class="date"><em><span>{{ page.date | date_to_long_string }}</span></em></div>
+	  </li>
+        <!--
+	    {% unless page.description == empty %}
+		<li>
+          <h4>Summary</h4>
+          {{ page.description }}
+		</li>
+        {% endunless %}
+	    {% unless page.categories == empty %}
+		<li>
+          <h4>Categories</h4>
+          <ul class="tag_box inline">
+            {% assign categories_list = page.categories %}
+            {% include JB/categories_list %}
+          </ul>
+		</li>
+        {% endunless %}
+	    -->
+      <li>
+        {% unless page.tags == empty %}
+        <h4>Tags</h4>
+        <ul class="tag_box inline">
+          {% assign tags_list = page.tags %}
+          {% include JB/tags_list %}
+        </ul>
+        {% endunless %}  
+	  </li>
+	</ul>
+  </div>
+</div>

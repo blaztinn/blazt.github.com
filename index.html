@@ -1,0 +1,64 @@
+---
+layout: page
+title: Posts
+tagline:
+---
+{% include JB/setup %}
+
+{% for post in site.posts limit:5 %}
+  <div class="row">
+    <div class="span8">
+
+      <h2> <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a> {% for category in post.categories %} <a href="{{ BASE_PATH }}{{ site.JB.categories_path }}#{{ category }}-ref"><small>{{ category }}</small></a> {% endfor %} </h2>
+      <p>
+        {{ post.content }}
+      </p>
+      <a href="{{ BASE_PATH }}{{ post.url }}/#comments-ref">Comment...</a>
+	</div>
+    
+	<div class="span4">
+      <ul>
+        <li>
+          <h4>Published</h4>
+          <div class="date"><em><span>{{ post.date | date_to_long_string }}</span></em></div>
+		</li>
+        <!--
+	    {% unless post.description == empty %}
+		<li>
+          <h4>Summary</h4>
+          {{ post.description }}
+		</li>
+        {% endunless %}
+	    {% unless post.categories == empty %}
+		<li>
+          <h4>Categories</h4>
+          <ul class="tag_box inline">
+            {% assign categories_list = post.categories %}
+            {% include JB/categories_list %}
+          </ul>
+		</li>
+        {% endunless %}
+	    -->
+        <li>
+          {% unless post.tags == empty %}
+          <h4>Tags</h4>
+          <ul class="tag_box inline">
+            {% assign tags_list = post.tags %}
+            {% include JB/tags_list %}
+          </ul>
+          {% endunless %}  
+	    </li>
+	  </ul>
+    </div>
+  </div>
+
+<hr />
+{% endfor %}
+
+<div class="pagination">
+  <div style="text-align:center;">
+    <ul>
+      <li><a href="{{ BASE_PATH }}{{ site.JB.archive_path }}">Archive</a></li>
+    </ul>
+  </div>
+</div>
